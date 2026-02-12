@@ -166,10 +166,10 @@ public class GameStateManager : MonoBehaviour
             }
             else if (currentState == GameState.Gameplay)
             {
-                SetState(GameState.Paused);
+                SetState(GameState.GameOver);
                 return;
             }
-            else if (currentState == GameState.Paused)
+            else if (currentState == GameState.GameOver)
             {
                 SetState(GameState.Init);
                 return;
