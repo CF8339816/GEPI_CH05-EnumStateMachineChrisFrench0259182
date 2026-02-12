@@ -9,8 +9,9 @@ public enum GameState
         Init,
         MainMenu,
         Gameplay,
-        Paused
-
+        Paused,
+        Settings,
+        GameOver
 
 }
 
@@ -98,7 +99,32 @@ public class GameStateManager : MonoBehaviour
 
 
                 break;
-                       
+
+            case GameState.GameOver:
+                Time.timeScale = 0;
+                uiManager.ShowGameOverUI();
+                Debug.Log("this game is glameOvewr");
+                break;
+
+            case GameState.Settings:
+
+                Time.timeScale = 0;
+
+
+                uiManager.ShowSettingsUI();
+
+                Debug.Log("this game is Settingsd");
+
+
+                break;
+
+
+
+
+
+
+
+
             default:
                 break;
         }
@@ -128,7 +154,28 @@ public class GameStateManager : MonoBehaviour
     //    }
     //}
 
-
+    private void Update()
+    {
+        // For testing purposes, we can use keyboard input to change states
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (currentState == GameState.MainMenu)
+            {
+                SetState(GameState.Gameplay);
+                return;
+            }
+            else if (currentState == GameState.Gameplay)
+            {
+                SetState(GameState.Paused);
+                return;
+            }
+            else if (currentState == GameState.Paused)
+            {
+                SetState(GameState.Init);
+                return;
+            }
+        }
+    }
 
 
     //public void OnStartGameButtonPressed()
@@ -141,7 +188,7 @@ public class GameStateManager : MonoBehaviour
 
     }
     //public void OnPauseButtonPressed()
-            public void TogglePause()
+     public void TogglePause()
     {
         if (currentState == GameState.Paused)
         {
@@ -159,5 +206,48 @@ public class GameStateManager : MonoBehaviour
 
         }
     }
+
+
+    public void ToggleSettings()
+    {
+        if (currentState == GameState.Settings)
+        {
+
+            if (currentState == GameState.Gameplay) return;
+
+            SetState(GameState.Gameplay);
+
+        }
+        else if (currentState == GameState.Gameplay)
+        {
+
+            if (currentState == GameState.Settings) return;
+            SetState(GameState.Settings);
+
+        }
+    }
+
+    public void EndGame()
+
+    {
+        SetState(GameState.GameOver);
+
+    }
+
+    public void MainMenu()
+
+    {
+        SetState(GameState.MainMenu);
+
+    }
+
+
+
+
+
+
+
+
+
 }
         
