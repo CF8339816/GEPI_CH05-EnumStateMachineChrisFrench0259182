@@ -119,66 +119,15 @@ public class GameStateManager : MonoBehaviour
                 break;
 
 
-
-
-
-
-
-
             default:
                 break;
         }
 
     }
 
-    //private void Update()
-    //{
-    //    // For testing purposes, we can use keyboard input to change states
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        if (currentState == GameState.MainMenu)
-    //        {
-    //            SetState(GameState.Gameplay);
-    //            return;
-    //        }
-    //        else if (currentState == GameState.Gameplay)
-    //        {
-    //            SetState(GameState.Paused);
-    //            return;
-    //        }
-    //        else if (currentState == GameState.Paused)
-    //        {
-    //            SetState(GameState.Init);
-    //            return;
-    //        }
-    //    }
-    //}
-
-    private void Update()
-    {
-        // For testing purposes, we can use keyboard input to change states
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (currentState == GameState.MainMenu)
-            {
-                SetState(GameState.Gameplay);
-                return;
-            }
-            else if (currentState == GameState.Gameplay)
-            {
-                SetState(GameState.GameOver);
-                return;
-            }
-            else if (currentState == GameState.GameOver)
-            {
-                SetState(GameState.Init);
-                return;
-            }
-        }
-    }
 
 
-    //public void OnStartGameButtonPressed()
+    
 
 
     public void StartGame()
@@ -187,7 +136,7 @@ public class GameStateManager : MonoBehaviour
         SetState(GameState.Gameplay);
 
     }
-    //public void OnPauseButtonPressed()
+
      public void TogglePause()
     {
         if (currentState == GameState.Paused)
@@ -210,27 +159,46 @@ public class GameStateManager : MonoBehaviour
 
     public void ToggleSettings()
     {
-        if (currentState == GameState.Settings)
-        {
+        //if (currentState == GameState.Settings)
+        //{
 
-            if (currentState == GameState.Gameplay) return;
+        //    if (currentState == GameState.Gameplay) return;
 
-            SetState(GameState.Gameplay);
+        //    SetState(GameState.Gameplay);
 
-        }
-        else if (currentState == GameState.Gameplay)
-        {
+        //}
+        //else if (currentState == GameState.Gameplay)
+        //{
 
-            if (currentState == GameState.Settings) return;
+        //    if (currentState == GameState.Settings) return;
             SetState(GameState.Settings);
 
-        }
+        //}
     }
 
     public void EndGame()
 
     {
+
         SetState(GameState.GameOver);
+
+        if (currentState == GameState.GameOver)
+        {
+
+            if (currentState == GameState.MainMenu) return;
+
+            SetState(GameState.MainMenu);
+
+        }
+        else if (currentState == GameState.MainMenu)
+        {
+
+            if (currentState == GameState.GameOver) return;
+            SetState(GameState.GameOver);
+
+        }
+
+
 
     }
 
